@@ -19,4 +19,5 @@ def enviar_imagem():
 
 
 if __name__ == '__main__':
+    # run application
     meu_app.run(debug=True, host='0.0.0.0')
