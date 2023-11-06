@@ -15,7 +15,7 @@ def enviar_imagem():
         response = read_text(url_file)
 
         return response
-    return None
+    return '{"msg": "method not allowed"}'
 
 
 if __name__ == '__main__':

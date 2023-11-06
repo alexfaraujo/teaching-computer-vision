@@ -20,7 +20,7 @@ def read_text(image_path):
 
     # Ignore small texts
     if not text or len(text) < 20:
-        return None
+        return '{"msg": "error"}'
     else:  # Some text was found
 
         # Read the language used in the text
@@ -32,4 +32,4 @@ def read_text(image_path):
             my_translator = GoogleTranslator(source='auto', target='en')
             text = my_translator.translate(text)
 
-    return text
+    return '{"msg": "'+text+'"}'
