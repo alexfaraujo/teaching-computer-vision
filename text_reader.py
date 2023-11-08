@@ -1,11 +1,13 @@
 import cv2
 import pytesseract
 from deep_translator import GoogleTranslator, single_detection
-
+# pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+import numpy as np
 
 def read_text(image_path):
     # read the image file
     img_cv = cv2.imread(image_path)
+    img_cv = image_resize(img_cv)
 
     # By default the OpenCV Lib read the image using BGR color map.
     # The pytesseract Lib receives a RGB image as input.
@@ -33,3 +35,12 @@ def read_text(image_path):
             text = my_translator.translate(text)
 
     return '{"msg": "'+text+'"}'
+
+
+def image_resize(image):
+    scale_percent = 360/min(image.shape[1], image.shape[0]) # percent of original size
+    width = int(image.shape[1] * scale_percent)
+    height = int(image.shape[0] * scale_percent)
+    dim = (width, height)
+    resized = cv2.resize(image, dim, interpolation = cv2.INTER_AREA)
+    return resized
